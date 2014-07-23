@@ -1,0 +1,35 @@
+{
+  "name": "node-extensions",
+  "version": "1.0.0",
+  "description": "Useful properties and methods for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "Chris Yip",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-jshint": "^1.7.1",
+    "gulp-mocha": "^0.5.1",
+    "jshint-stylish": "^0.4.0",
+    "lodash": "^2.4.1",
+    "fast.js": "^0.0.3",
+    "benchmark": "^1.0.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisyip/node-extensions.git"
+  },
+  "keywords": [
+    "extension",
+    "helper"
+  ],
+  "bugs": {
+    "url": "https://github.com/chrisyip/node-extensions/issues"
+  },
+  "homepage": "https://github.com/chrisyip/node-extensions"
+}
