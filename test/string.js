@@ -12,6 +12,17 @@ describe('String', function(){
     })
   })
 
+  describe('#slugify()', function(){
+    it('should return slugified string', function(){
+      assert.equal(true, 'hello world'.slugify() === 'hello-world')
+      assert.equal(true, 'hello_world'.slugify() === 'hello-world')
+      assert.equal(true, '你好'.slugify() === '')
+      assert.equal(true, 'hello world_'.slugify() === 'hello-world')
+      assert.equal(true, 'hello world'.slugify('_') === 'hello_world')
+      assert.equal(true, 'hello world'.slugify('***') === 'hello***world')
+    })
+  })
+
   describe('#interpolate()', function(){
     it('should return new string with specicied variables', function(){
       var result = 'Hello, Node Ninja'
