@@ -1,3 +1,5 @@
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-url]][daviddm-image]
+
 # Usage
 
 ```
@@ -325,3 +327,8 @@ Object.defineProperty(String.prototype, 'isEmpty', {
 
 s.isEmpty // 'hello'
 ```
+
+[npm-url]: https://npmjs.org/package/node-extensions
+[npm-image]: https://badge.fury.io/js/node-extensions.svg
+[daviddm-url]: https://david-dm.org/chrisyip/node-extensions.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/chrisyip/node-extensions
