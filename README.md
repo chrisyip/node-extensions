@@ -1,19 +1,32 @@
+# Node Extensions [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
+Extend Node's `global` object.
+
 # Usage
 
 ```
 npm install --save node-extensions
 ```
 
-Require once in your project's main file, e.g. `index.js` or `app.js`:
+This package attachs APIs to `global` object (like es5-shim), so what you need to do is just require it once in your project's main file, e.g. `index.js` or `app.js`. That's all.
+
+Recommend to require node extensions on the very top of file.
 
 ```js
 require('node-extensions')
-```
 
-Done!
+var obj = { 0: 'Hello', 1: 'Node', length: 2 }
 
-```
-[].isEmpty // true
+console.log(Array.from(obj).reduce(function (prev, cur) {
+  return prev + ' ' + cur
+}))
+// 'Hello Node'
+
+var fruits = ['Apple', 'Orange']
+
+if (fruits.isEmpty === false) {
+  // do somethinge
+}
 
 'the great gatsby'.toCapitalCase() // 'the Great Gatsby'
 ```
@@ -325,3 +338,8 @@ Object.defineProperty(String.prototype, 'isEmpty', {
 
 s.isEmpty // 'hello'
 ```
+
+[npm-url]: https://npmjs.org/package/node-extensions
+[npm-image]: https://badge.fury.io/js/node-extensions.svg
+[daviddm-url]: https://david-dm.org/chrisyip/node-extensions
+[daviddm-image]: https://david-dm.org/chrisyip/node-extensions.svg
