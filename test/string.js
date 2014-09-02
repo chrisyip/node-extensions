@@ -1,3 +1,5 @@
+/* jshint -W053 */
+
 var assert = require('assert')
 
 require('../lib/string')
@@ -54,6 +56,14 @@ describe('String', function(){
       assert.equal(true, String.isEmpty(''))
       assert.equal(true, String.isEmpty(' '))
       assert.equal(false, String.isEmpty('node ninja'))
+    })
+  })
+
+  describe('#isString()', function(){
+    it('should return true for string', function(){
+      assert.equal(true, String.isString('node ninja'))
+      assert.equal(true, String.isString(new String('node ninja')))
+      assert.equal(false, String.isString(true))
     })
   })
 
