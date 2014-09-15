@@ -5,6 +5,17 @@ var assert = require('assert')
 require('../lib/string')
 
 describe('String', function(){
+  describe('#toCamelCase()', function(){
+    it('should return camelized string', function(){
+      assert.equal(true, 'hello   world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello----world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello___world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello_world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello.world'.toCamelCase() === 'hello.world')
+      assert.equal(true, 'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld')
+    })
+  })
+
   describe('#toCapitalCase()', function(){
     it('should return capitalized string', function(){
       var str = 'Hello world, node-ninja',

@@ -308,6 +308,19 @@ String.isString(true) === false
 'Hello'.startsWith('e', 1) === true
 ```
 
+#### toCamelCase
+
+[http://stackoverflow.com/a/10425344](http://stackoverflow.com/a/10425344)
+
+```js
+'hello   world'.toCamelCase() === 'helloWorld'
+'hello----world'.toCamelCase() === 'helloWorld'
+'hello___world'.toCamelCase() === 'helloWorld'
+'hello_world'.toCamelCase() === 'helloWorld'
+'hello.world'.toCamelCase() === 'hello.world'
+'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld'
+```
+
 #### toCapitalCase
 
 ```js
