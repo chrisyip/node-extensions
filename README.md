@@ -265,6 +265,14 @@ String.isEmpty('') === true
 String.isEmpty(' ') === true
 ```
 
+#### isString
+
+```js
+String.isString('str') === true
+String.isString(new String('str')) === true
+String.isString(true) === false
+```
+
 #### interpolate
 
 ```js
