@@ -1,4 +1,6 @@
-# Node Extensions [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# Node Extensions
+
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 Extend Node's `global` object.
 
@@ -363,6 +365,6 @@ s.isEmpty // 'hello'
 ```
 
 [npm-url]: https://npmjs.org/package/node-extensions
-[npm-image]: https://badge.fury.io/js/node-extensions.svg
+[npm-image]: http://img.shields.io/npm/v/node-extensions.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/chrisyip/node-extensions
-[daviddm-image]: https://david-dm.org/chrisyip/node-extensions.svg
+[daviddm-image]: http://img.shields.io/david/chrisyip/node-extensions.svg?style=flat-square
