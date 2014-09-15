@@ -208,6 +208,21 @@ Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
 ```
 
+## Boolean
+
+### Methods
+
+#### isBoolean
+
+`isBoolean(target)`
+
+```js
+Boolean.isBoolean(true) // true
+Boolean.isBoolean(false) // true
+Boolean.isBoolean(new Boolean(true)) // true
+Boolean.isBoolean('true') // false
+```
+
 ## String
 
 ### Properties
