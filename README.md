@@ -1,6 +1,6 @@
 # Node Extensions
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Travis CI][travis-image]][travis-url]
 
 Extend Node's `global` object.
 
@@ -368,3 +368,5 @@ s.isEmpty // 'hello'
 [npm-image]: http://img.shields.io/npm/v/node-extensions.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/chrisyip/node-extensions
 [daviddm-image]: http://img.shields.io/david/chrisyip/node-extensions.svg?style=flat-square
+[travis-url]: https://travis-ci.org/chrisyip/node-extensions
+[travis-image]: http://img.shields.io/travis/chrisyip/node-extensions.svg?style=flat-square
