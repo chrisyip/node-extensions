@@ -1,14 +1,38 @@
+/* jshint -W053 */
+
 var assert = require('assert')
 
 require('../lib/string')
 
 describe('String', function(){
+  describe('#toCamelCase()', function(){
+    it('should return camelized string', function(){
+      assert.equal(true, 'hello   world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello----world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello___world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello_world'.toCamelCase() === 'helloWorld')
+      assert.equal(true, 'hello.world'.toCamelCase() === 'hello.world')
+      assert.equal(true, 'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld')
+    })
+  })
+
   describe('#toCapitalCase()', function(){
     it('should return capitalized string', function(){
       var str = 'Hello world, node-ninja',
           result = 'Hello World, Node-ninja'
 
       assert.equal(true, str.toCapitalCase() === result)
+    })
+  })
+
+  describe('#slugify()', function(){
+    it('should return slugified string', function(){
+      assert.equal(true, 'hello world'.slugify() === 'hello-world')
+      assert.equal(true, 'hello_world'.slugify() === 'hello-world')
+      assert.equal(true, '你好'.slugify() === '')
+      assert.equal(true, 'hello world_'.slugify() === 'hello-world')
+      assert.equal(true, 'hello world'.slugify('_') === 'hello_world')
+      assert.equal(true, 'hello world'.slugify('***') === 'hello***world')
     })
   })
 
@@ -43,6 +67,14 @@ describe('String', function(){
       assert.equal(true, String.isEmpty(''))
       assert.equal(true, String.isEmpty(' '))
       assert.equal(false, String.isEmpty('node ninja'))
+    })
+  })
+
+  describe('#isString()', function(){
+    it('should return true for string', function(){
+      assert.equal(true, String.isString('node ninja'))
+      assert.equal(true, String.isString(new String('node ninja')))
+      assert.equal(false, String.isString(true))
     })
   })
 

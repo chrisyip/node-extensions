@@ -1,4 +1,8 @@
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-url]][daviddm-image]
+# Node Extensions
+
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Travis CI][travis-image]][travis-url]
+
+Extend Node's `global` object.
 
 # Usage
 
@@ -6,16 +10,25 @@
 npm install --save node-extensions
 ```
 
-Require once in your project's main file, e.g. `index.js` or `app.js`:
+This package attachs APIs to `global` object (like es5-shim), so what you need to do is just require it once in your project's main file, e.g. `index.js` or `app.js`. That's all.
+
+Recommend to require node extensions on the very top of file.
 
 ```js
 require('node-extensions')
-```
 
-Done!
+var obj = { 0: 'Hello', 1: 'Node', length: 2 }
 
-```
-[].isEmpty // true
+console.log(Array.from(obj).reduce(function (prev, cur) {
+  return prev + ' ' + cur
+}))
+// 'Hello Node'
+
+var fruits = ['Apple', 'Orange']
+
+if (fruits.isEmpty === false) {
+  // do somethinge
+}
 
 'the great gatsby'.toCapitalCase() // 'the Great Gatsby'
 ```
@@ -197,6 +210,21 @@ Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
 ```
 
+## Boolean
+
+### Methods
+
+#### isBoolean
+
+`isBoolean(target)`
+
+```js
+Boolean.isBoolean(true) // true
+Boolean.isBoolean(false) // true
+Boolean.isBoolean(new Boolean(true)) // true
+Boolean.isBoolean('true') // false
+```
+
 ## String
 
 ### Properties
@@ -239,6 +267,14 @@ String.isEmpty('') === true
 String.isEmpty(' ') === true
 ```
 
+#### isString
+
+```js
+String.isString('str') === true
+String.isString(new String('str')) === true
+String.isString(true) === false
+```
+
 #### interpolate
 
 ```js
@@ -270,6 +306,19 @@ String.isEmpty(' ') === true
 'Hello'.startsWith('h') === false
 'Hello'.startsWith('e') === false
 'Hello'.startsWith('e', 1) === true
+```
+
+#### toCamelCase
+
+[http://stackoverflow.com/a/10425344](http://stackoverflow.com/a/10425344)
+
+```js
+'hello   world'.toCamelCase() === 'helloWorld'
+'hello----world'.toCamelCase() === 'helloWorld'
+'hello___world'.toCamelCase() === 'helloWorld'
+'hello_world'.toCamelCase() === 'helloWorld'
+'hello.world'.toCamelCase() === 'hello.world'
+'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld'
 ```
 
 #### toCapitalCase
@@ -329,6 +378,8 @@ s.isEmpty // 'hello'
 ```
 
 [npm-url]: https://npmjs.org/package/node-extensions
-[npm-image]: https://badge.fury.io/js/node-extensions.svg
-[daviddm-url]: https://david-dm.org/chrisyip/node-extensions.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/chrisyip/node-extensions
+[npm-image]: http://img.shields.io/npm/v/node-extensions.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/chrisyip/node-extensions
+[daviddm-image]: http://img.shields.io/david/chrisyip/node-extensions.svg?style=flat-square
+[travis-url]: https://travis-ci.org/chrisyip/node-extensions
+[travis-image]: http://img.shields.io/travis/chrisyip/node-extensions.svg?style=flat-square
