@@ -4,18 +4,20 @@
   "description": "Useful properties and methods for node",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "mocha --reporter nyan --bail --check-leaks test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
-  "author": "Chris Yip",
+  "author": "Chris Yip <i@chrisyip.im>",
   "license": "MIT",
   "devDependencies": {
+    "benchmark": "^1.0.0",
+    "fast.js": "^0.0.3",
     "gulp": "^3.8.8",
     "gulp-jshint": "^1.8.4",
-    "gulp-mocha": "^1.1.0",
+    "istanbul": "^0.3.2",
     "jshint-stylish": "^0.4.0",
     "lodash": "^2.4.1",
-    "fast.js": "^0.0.3",
-    "benchmark": "^1.0.0"
+    "mocha": "^1.21.4"
   },
   "directories": {
     "test": "test"
@@ -26,7 +28,9 @@
   },
   "keywords": [
     "extension",
-    "helper"
+    "helper",
+    "functional",
+    "util"
   ],
   "bugs": {
     "url": "https://github.com/chrisyip/node-extensions/issues"

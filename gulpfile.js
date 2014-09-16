@@ -1,15 +1,10 @@
 var gulp = require('gulp'),
-    mocha = require('gulp-mocha'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish')
 
-gulp.task('test', function () {
-  return gulp.src('test/index.js', { read: false })
-          .pipe(mocha({ reporter: 'nyan' }))
-})
-
 gulp.task('lint', function () {
   return gulp.src([
+            'gulpfile.js',
             'index.js',
             'lib/**/*.js',
             'bench/**/*.js',
@@ -19,4 +14,4 @@ gulp.task('lint', function () {
           .pipe(jshint.reporter(stylish))
 })
 
-gulp.task('default', ['test', 'lint'])
+gulp.task('default', ['lint'])
