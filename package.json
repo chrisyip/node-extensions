@@ -35,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/chrisyip/node-extensions/issues"
   },
-  "homepage": "https://github.com/chrisyip/node-extensions"
+  "homepage": "https://github.com/chrisyip/node-extensions",
+  "dependencies": {
+    "semver": "^3.0.1"
+  }
 }
