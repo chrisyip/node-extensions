@@ -166,4 +166,28 @@ describe('Array', function(){
       assert.equal(true, insertion === insertion.insert('element', 1))
     })
   })
+
+  describe('#remove()', function(){
+    it('should remove element from specified position', function(){
+      var arr = ['abc', 'abc', true],
+          removal = ['abc', 'abc', true]
+
+      removal.remove('abc', 1)
+
+      assert.equal(2, removal.length)
+      assert.equal(false, arr[1] === removal[1])
+      assert.equal(0, removal.lastIndexOf('abc'))
+
+      removal = ['efg', 'abc', 'efg']
+      removal.remove('efg', -1)
+      assert.equal(0, removal.lastIndexOf('efg'))
+    })
+
+    it('should return removed element after removal', function(){
+      var obj = { foo: 'bar' },
+          removal = [obj]
+
+      assert.equal(true, obj === removal.remove(obj))
+    })
+  })
 })
