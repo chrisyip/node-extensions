@@ -142,4 +142,28 @@ describe('Array', function(){
       assert.equal(true, Array.of(1, 'abc', true).equalTo(arr))
     })
   })
+
+  describe('#insert()', function(){
+    it('should insert element to specified position', function(){
+      var arr = [1, 'abc', true],
+          insertion = [1, 'abc', true]
+
+      insertion.insert('element', 1)
+
+      assert.equal(4, insertion.length)
+      assert.equal(false, arr[1] === insertion[1])
+      assert.equal(true, arr[1] === insertion[2])
+      assert.equal(true, arr[2] === insertion[3])
+
+      insertion = ['foo']
+      insertion.insert('foo')
+      assert.equal(1, insertion.lastIndexOf('foo'))
+    })
+
+    it('should return itself after insertion', function(){
+      var insertion = [1, 'abc', true]
+
+      assert.equal(true, insertion === insertion.insert('element', 1))
+    })
+  })
 })
