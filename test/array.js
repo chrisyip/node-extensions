@@ -223,4 +223,36 @@ describe('Array', function(){
       assert.equal(true, obj === removal.remove(obj))
     })
   })
+
+  describe('#flatten()', function(){
+    it('flatten whole array, even array-like', function(){
+      var arr = [1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten()
+
+      assert.equal(true, [1, 2, 3, 4, 5].every(function (item, i) {
+        arr[i] === item
+      }))
+    })
+
+    it('original array should be untouched', function(){
+      var obj = { 0: 5, length: 1 },
+          arr = [1, [2, [3, [4, obj]]]],
+          backup = [1, [2, [3, [4, obj]]]]
+
+      arr.flatten()
+
+      assert.equal(true, arr.every(function (item, i) {
+        backup[i] === item
+      }))
+    })
+
+    it('should return flattened array', function(){
+      var arr = [1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten()
+
+      assert.equal(false, arr.some(function (item) {
+        return Array.isArray(item) || (typeof item == 'object' && [].toString.call(item.length) == '[object Number]')
+      }))
+      
+      assert.equal(5, arr.length)
+    })
+  })
 })

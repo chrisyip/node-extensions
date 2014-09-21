@@ -157,6 +157,12 @@ arr.insert(4, 3) // [1, 2, 3, 4, 5]
 }) // 1
 ```
 
+#### flatten
+
+```js
+[1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten() // [1, 2, 3, 4, 5]
+```
+
 #### from
 
 [http://people.mozilla.org/\~jorendorff/es6-draft.html#sec-array.from](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.from)
