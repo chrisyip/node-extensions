@@ -220,6 +220,19 @@ array.forEach(iterator).map(iterator)
 Array.of(1);         // [1]
 Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
+
+#### remove
+
+```js
+Array.remove(element, startPosition)
+```
+
+```js
+var arr = ['foo', 'bar', 'foo']
+arr.remove('foo', 1) // 'foo'
+arr // ['foo', 'bar']
+arr.remove('foo', 1) // undefined
+arr // ['foo', 'bar']
 ```
 
 ## Boolean

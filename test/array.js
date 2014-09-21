@@ -184,7 +184,7 @@ describe('Array', function(){
   })
 
   describe('#remove()', function(){
-    it('should remove element from specified position', function(){
+    it('should remove element start from specified position', function(){
       var arr = ['abc', 'abc', true],
           removal = ['abc', 'abc', true]
 
@@ -197,6 +197,23 @@ describe('Array', function(){
       removal = ['efg', 'abc', 'efg']
       removal.remove('efg', -1)
       assert.equal(0, removal.lastIndexOf('efg'))
+    })
+
+    it('should remove element from the first presented position of element when position is undefined or NaN', function(){
+      var removal = ['foo', 'bar', 'foo']
+
+      removal.remove('foo')
+      assert.equal(true, removal.indexOf('foo') === removal.lastIndexOf('foo'))
+
+      removal = ['foo', 'bar', 'foo']
+      removal.remove('foo', 'NaN')
+      assert.equal(true, removal.indexOf('foo') === removal.lastIndexOf('foo'))
+    })
+
+    it('should not remove element when cannot found element in array', function(){
+      var removal = ['foo']
+      assert.equal(true, removal.remove('bar') === undefined)
+      assert.equal(true, removal.remove('foo', 1) === undefined)
     })
 
     it('should return removed element after removal', function(){
