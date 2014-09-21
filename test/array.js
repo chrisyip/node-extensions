@@ -155,9 +155,25 @@ describe('Array', function(){
       assert.equal(true, arr[1] === insertion[2])
       assert.equal(true, arr[2] === insertion[3])
 
-      insertion = ['foo']
+      insertion = ['foo', 'bar']
+      insertion.insert('zoo', -1)
+      assert.equal(true, 'zoo' === insertion[1])
+    })
+
+    it('should insert to the last position when position is undefined or NaN', function(){
+      var insertion = [1, 'abc', true]
+
       insertion.insert('foo')
-      assert.equal(1, insertion.lastIndexOf('foo'))
+      assert.equal(true, 'foo' === insertion[insertion.length - 1])
+      insertion.insert('bar', 'NaN')
+      assert.equal(true, 'bar' === insertion[insertion.length - 1])
+    })
+
+    it('should insert to the first position when (length - 1 - position) is less than zero', function(){
+      var insertion = [1, 'abc', true]
+
+      insertion.insert('foo', -3)
+      assert.equal(true, 'foo' === insertion[0])
     })
 
     it('should return itself after insertion', function(){

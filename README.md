@@ -133,6 +133,18 @@ Object.merge(
 }) === true
 ```
 
+#### insert
+
+```js
+Array.insert(element, position)
+```
+
+```js
+var arr = [1, 2, 3]
+arr.insert(5) // [1, 2, 3, 5]
+arr.insert(4, 3) // [1, 2, 3, 4, 5]
+```
+
 #### find & findIndex
 
 ```js
