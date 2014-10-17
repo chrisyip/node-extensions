@@ -37,6 +37,6 @@
   },
   "homepage": "https://github.com/chrisyip/node-extensions",
   "dependencies": {
-    "semver": "^3.0.1"
+    "semver": "^4.1.0"
   }
 }

@@ -2,7 +2,7 @@
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Travis CI][travis-image]][travis-url] [![Coveralls][coveralls-image]][coveralls-url]
 
-Extend Node's `global` object.
+Extend Node's `global` object. No dependencies except [semver](https://www.npmjs.org/package/semver).
 
 # Usage
 
