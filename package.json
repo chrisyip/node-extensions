@@ -4,8 +4,8 @@
   "description": "Useful properties and methods for node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter nyan --bail --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test": "gulp lint && mocha --reporter nyan --bail --check-leaks test/",
+    "test-travis": "gulp lint && istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
   "author": "Chris Yip <i@chrisyip.im>",
   "license": "MIT",

@@ -118,6 +118,22 @@ Object.merge(
 
 ### Methods
 
+#### compact
+
+`compact`
+
+Like Ruby's [Array#compact()](http://www.ruby-doc.org/core-2.1.3/Array.html#method-i-compact), creates a new array that all undefined and null elements removed, or a new array with all elements that pass the test implemented by the provided function.
+
+`compact(mapfn[, thisArg])` alias of `Array#filter()`.
+
+```js
+[1, , null, 2].compact() // [1, 2]
+
+['foo', 'bar', 1, 2].compact(function (item) {
+    return typeof item === 'string'
+}) // ['foo', 'bar']
+```
+
 #### equalTo
 
 `equalTo(target, mapfn, thisArg)`
@@ -133,6 +149,18 @@ Object.merge(
 }) === true
 ```
 
+#### insert
+
+```js
+Array.insert(element, position)
+```
+
+```js
+var arr = [1, 2, 3]
+arr.insert(5) // [1, 2, 3, 5]
+arr.insert(4, 3) // [1, 2, 3, 4, 5]
+```
+
 #### find & findIndex
 
 ```js
@@ -143,6 +171,12 @@ Object.merge(
 [1, 2, 3].findIndex(function (item) {
     return item % 2 === 0
 }) // 1
+```
+
+#### flatten
+
+```js
+[1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten() // [1, 2, 3, 4, 5]
 ```
 
 #### from
@@ -208,6 +242,19 @@ array.forEach(iterator).map(iterator)
 Array.of(1);         // [1]
 Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
+
+#### remove
+
+```js
+Array.remove(element, startPosition)
+```
+
+```js
+var arr = ['foo', 'bar', 'foo']
+arr.remove('foo', 1) // 'foo'
+arr // ['foo', 'bar']
+arr.remove('foo', 1) // undefined
+arr // ['foo', 'bar']
 ```
 
 ## Boolean
