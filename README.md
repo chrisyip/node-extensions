@@ -118,6 +118,22 @@ Object.merge(
 
 ### Methods
 
+#### compact
+
+`compact`
+
+Like Ruby's [Array#compact()](http://www.ruby-doc.org/core-2.1.3/Array.html#method-i-compact), creates a new array that all undefined and null elements removed, or a new array with all elements that pass the test implemented by the provided function.
+
+`compact(mapfn[, thisArg])` alias of `Array#filter()`.
+
+```js
+[1, , null, 2].compact() // [1, 2]
+
+['foo', 'bar', 1, 2].compact(function (item) {
+    return typeof item === 'string'
+}) // ['foo', 'bar']
+```
+
 #### equalTo
 
 `equalTo(target, mapfn, thisArg)`

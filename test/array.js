@@ -2,6 +2,33 @@ var assert = require('assert')
 
 require('../lib/array')
 
+function filterTest (method) {
+  it('should create a new array with all elements that pass the test implemented by the provided function', function () {
+    var arr = [1, , null, 2, true, false, 0, ''][method](function (item) {
+      return typeof item == 'number'
+    })
+
+    assert.equal(3, arr.length)
+    assert.equal(true, [1, 2, 0].every(function (item, i) {
+      return item === arr[i]
+    }))
+
+    var obj = {
+      foo: false,
+      bar: true
+    }
+
+    arr = ['foo', 'bar', 'zoo'].compact(function (item) {
+      return item in this
+    }, obj)
+
+    assert.equal(2, arr.length)
+    assert.equal(true, ['foo', 'bar'].every(function (item, i) {
+      return item === arr[i]
+    }))
+  })
+}
+
 describe('Array', function(){
   describe('#first', function() {
     it('should return first element for non-empty array', function() {
@@ -225,7 +252,7 @@ describe('Array', function(){
   })
 
   describe('#flatten()', function(){
-    it('flatten whole array, even array-like', function(){
+    it('should flatten whole array, even array-like', function(){
       var arr = [1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten()
 
       assert.equal(true, [1, 2, 3, 4, 5].every(function (item, i) {
@@ -251,8 +278,27 @@ describe('Array', function(){
       assert.equal(false, arr.some(function (item) {
         return Array.isArray(item) || (typeof item == 'object' && [].toString.call(item.length) == '[object Number]')
       }))
-      
+
       assert.equal(5, arr.length)
     })
+  })
+
+  describe('#filter()', function () {
+    it('should create a new array with all elements that pass the test implemented by the provided function', function () {
+      filterTest('filter')
+    })
+  })
+
+  describe('#compact()', function(){
+    it('should create a new array that all undefined and null elements removed', function(){
+      var arr = [1, , null, 2].compact()
+
+      assert.equal(2, arr.length)
+      assert.equal(true, [1, 2].every(function (item, i) {
+        arr[i] === item
+      }))
+    })
+
+    filterTest('compact')
   })
 })
