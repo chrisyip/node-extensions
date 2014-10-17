@@ -120,7 +120,7 @@ Object.merge(
 
 #### compact
 
-`compact`
+`compact()`
 
 Like Ruby's [Array#compact()](http://www.ruby-doc.org/core-2.1.3/Array.html#method-i-compact), creates a new array that all undefined and null elements removed, or a new array with all elements that pass the test implemented by the provided function.
 
@@ -242,6 +242,7 @@ array.forEach(iterator).map(iterator)
 Array.of(1);         // [1]
 Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
+```
 
 #### remove
 
