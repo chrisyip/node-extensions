@@ -18,7 +18,7 @@ function filterTest (method) {
       bar: true
     }
 
-    arr = ['foo', 'bar', 'zoo'].compact(function (item) {
+    arr = ['foo', 'bar', 'zoo'][method](function (item) {
       return item in this
     }, obj)
 
@@ -295,7 +295,7 @@ describe('Array', function(){
 
       assert.equal(2, arr.length)
       assert.equal(true, [1, 2].every(function (item, i) {
-        arr[i] === item
+        return arr[i] === item
       }))
     })
 
