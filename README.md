@@ -223,7 +223,7 @@ Array.isEmpty([ , ]) === true
 
 `forEach`, `map`, `every`, `some`, `filter`, `reduce`, `reduceRight`, `indexOf`, and `lastIndexOf` are overried for performance concerned.
 
-Those methods are slower than [fast.js](https://github.com/codemix/fast.js) or [lodash](http://lodash.com), but still faster than built-in methods. The performance of package that uses built-in methods should be improved. *[Benchmarks](https://github.com/chrisyip/node-extensions/blob/master/benchmarks.md)*.
+The new methods are faster than built-in methods. By overriding the built-in methods, the general performances of using built-in methods should be improved. More details: [benchmarks](https://github.com/chrisyip/node-extensions/blob/master/benchmarks.md).
 
 ```js
 array.forEach(iterator).map(iterator)
