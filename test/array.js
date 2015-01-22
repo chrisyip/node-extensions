@@ -1,4 +1,8 @@
+/* jshint -W053 */
+
 var assert = require('assert')
+
+var should = require('should')
 
 require('../lib/array')
 
@@ -80,8 +84,19 @@ describe('Array', function(){
 
   describe('#isArrayLike()', function() {
     it('should return true for array-like object', function() {
-      assert.equal(true, Array.isArrayLike({ 0: 1, length: 0 }))
-      assert.equal(true, Array.isArrayLike('substr'))
+      should(Array.isArrayLike({ 0: 1, length: 1 })).be.true
+      Array.isArrayLike('substr').should.be.true
+      Array.isArrayLike('').should.be.true
+      Array.isArrayLike({ length: 0 }).should.be.true
+      Array.isArrayLike({ 0: 'foo', length: new Number(1) }).should.be.true
+      Array.isArrayLike({ 0: 'foo', length: '' }).should.be.true
+      Array.isArrayLike({ 0: 'foo', length: null }).should.be.true
+      Array.isArrayLike({ 0: 'foo', length: true }).should.be.true
+      Array.isArrayLike({ 0: 'foo', length: false }).should.be.true
+
+      Array.isArrayLike({ 0: 'foo', length: new Number(1.2) }).should.be.false
+      Array.isArrayLike({ 0: 'foo', length: 1.2 }).should.be.false
+      Array.isArrayLike({ 0: 'foo', length: undefined }).should.be.false
     })
   })
 

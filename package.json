@@ -4,6 +4,8 @@
   "description": "Useful properties and methods for node",
   "main": "index.js",
   "scripts": {
+    "mocha": "node --harmony node_modules/mocha/bin/_mocha --bail --check-leaks test/",
+    "mocha:cov": "node --harmony node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha --bail --check-leaks test/",
     "test": "gulp lint && mocha --reporter nyan --bail --check-leaks test/",
     "test-travis": "gulp lint && istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
@@ -17,7 +19,8 @@
     "istanbul": "^0.3.2",
     "jshint-stylish": "^1.0.0",
     "lodash": "^2.4.1",
-    "mocha": "^2.0.0"
+    "mocha": "^2.0.0",
+    "should": "^4.6.1"
   },
   "directories": {
     "test": "test"
