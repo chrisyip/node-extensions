@@ -15,6 +15,11 @@ describe('Object', function(){
       assert.equal('node', target.name)
       assert.equal('ninja', target.title)
     })
+
+    it('should return the first argument when passing one argument', function () {
+      var obj = {}
+      Object.assign(obj).should.eql(obj)
+    })
   })
 
   describe('#merge()', function(){
@@ -26,6 +31,11 @@ describe('Object', function(){
 
       assert.equal('node', target.person.name)
       assert.equal('ninja', target.person.title)
+    })
+
+    it('should return the first argument when passing one argument', function () {
+      var obj = {}
+      Object.merge(obj).should.eql(obj)
     })
   })
 

@@ -18,10 +18,19 @@ describe('String', function(){
 
   describe('#toCapitalCase()', function(){
     it('should return capitalized string', function(){
-      var str = 'Hello world, node-ninja',
-          result = 'Hello World, Node-ninja'
+      'The quick brown fox jumps over the lazy dog'
+        .toCapitalCase()
+        .should.be.eql('The Quick Brown Fox Jumps Over the Lazy Dog')
+    })
 
-      assert.equal(true, str.toCapitalCase() === result)
+    it('should return original string if it is empty string', function () {
+      ''.toCapitalCase().should.be.eql('')
+    })
+
+    it('should return original string if nothing to capitalize', function () {
+      var str = '123456'
+
+      '123456'.toCapitalCase().should.be.eql(str)
     })
   })
 
@@ -43,6 +52,10 @@ describe('String', function(){
       assert.equal(true, 'Hello, #{name} #{title}'.interpolate({ name: 'Node', title: 'Ninja' }) === result)
 
       assert.equal(true, 'Hello, #{0} #{1}'.interpolate(['Node', 'Ninja']) === result)
+    })
+
+    it('should return itself if no var name found', function () {
+      'foo'.interpolate({ foo: 'bar' }).should.be.eql('foo')
     })
   })
 

@@ -34,6 +34,25 @@ function filterTest (method) {
 }
 
 describe('Array', function(){
+  describe('#contains', function() {
+    it('should return ture when element found in array', function() {
+      var obj = {}
+      var arr = [1, obj, 'foo', true]
+
+      arr.contains(1).should.be.true
+      arr.contains(true).should.be.true
+      arr.contains('foo').should.be.true
+      arr.contains(obj).should.be.true
+      arr.contains(1, -4).should.be.true
+      arr.contains(obj, -3).should.be.true
+      arr.contains(1, 'abc').should.be.true
+
+      arr.contains(obj, -2).should.be.false
+      arr.contains(false).should.be.false
+      arr.contains(1, 1).should.be.false
+    })
+  })
+
   describe('#first', function() {
     it('should return first element for non-empty array', function() {
       assert.equal('str', ['str', 'sub'].first)
@@ -124,6 +143,12 @@ describe('Array', function(){
 
         return true
       }))
+
+      arr1.equalTo(arr2, function () {
+        this.should.be.eql(arr3)
+      }, arr3)
+
+      arr1.equalTo(arr3).should.be.false
     })
   })
 
