@@ -6,7 +6,7 @@ var Benchmark = require('benchmark'),
     callback = function () {},
     benchmark
 
-[
+;[
   'forEach',
   'map',
   'some',
@@ -31,16 +31,16 @@ require('../lib/array')
     .on('start', function () {
       console.log(prop, 'without context')
     })
-    .add('native ' + prop, function () {
+    .add('native         ', function () {
       arr['_' + prop](callback)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](callback)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, callback)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, callback)
     })
 
@@ -56,16 +56,16 @@ var thisArg = {}
     .on('start', function () {
       console.log(prop, 'with context')
     })
-    .add('native ' + prop , function () {
+    .add('native         ' , function () {
       arr['_' + prop](callback, thisArg)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](callback, thisArg)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, callback, thisArg)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, callback, thisArg)
     })
 
@@ -79,16 +79,16 @@ var thisArg = {}
     .on('start', function () {
       console.log(prop, 'without context')
     })
-    .add('native ' + prop , function () {
+    .add('native         ' , function () {
       arr['_' + prop](5)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](5)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, 5)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, 5)
     })
 
@@ -102,16 +102,16 @@ var thisArg = {}
     .on('start', function () {
       console.log(prop, 'with context')
     })
-    .add('native ' + prop , function () {
+    .add('native         ' , function () {
       arr['_' + prop](5, 3)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](5, 3)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, 5, 3)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, 5, 3)
     })
 
@@ -125,16 +125,16 @@ var thisArg = {}
     .on('start', function () {
       console.log(prop, 'without context')
     })
-    .add('native ' + prop , function () {
+    .add('native         ' , function () {
       arr['_' + prop](callback)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](callback)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, callback)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, callback)
     })
 
@@ -148,16 +148,16 @@ var thisArg = {}
     .on('start', function () {
       console.log(prop, 'with context')
     })
-    .add('native ' + prop , function () {
+    .add('native         ' , function () {
       arr['_' + prop](callback, 3)
     })
-    .add('new ' + prop , function () {
+    .add('node-extensions' , function () {
       arr[prop](callback, 3)
     })
-    .add('fast.js ' + prop , function () {
+    .add('fast.js        ' , function () {
       fast[prop](arr, callback, 3)
     })
-    .add('lodash ' + prop , function () {
+    .add('lodash         ' , function () {
       _[prop](arr, callback, 3)
     })
 
