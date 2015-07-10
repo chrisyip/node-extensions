@@ -163,6 +163,7 @@ describe('Array', function () {
     }
 
     it('should return ture when element found in array', function () {
+      includesTest('includes')
       includesTest('contains')
     })
   })

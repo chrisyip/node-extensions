@@ -149,6 +149,14 @@ Like Ruby's [Array#compact()](http://www.ruby-doc.org/core-2.1.3/Array.html#meth
 }) === true
 ```
 
+#### includes
+
+```js
+[1, 2, 3].includes(2) === true
+// Array#contains is an alias of Array#includes
+[1, 2, 3].contains(2) === true
+```
+
 #### insert
 
 ```js
@@ -287,16 +295,6 @@ Boolean.isBoolean('true') // false
 
 ### Methods
 
-#### contains
-
-[http://people.mozilla.org/\~jorendorff/es6-draft.html#sec-string.prototype.contains](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype.contains)
-
-```js
-'str'.contains('t') === true
-'str'.contains('sub') === false
-'substr'.contains('sub', 1) === false
-```
-
 #### endsWith
 
 [http://people.mozilla.org/\~jorendorff/es6-draft.html#sec-string.prototype.startswith](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype.endswith)
@@ -306,6 +304,18 @@ Boolean.isBoolean('true') // false
 'Hello'.endsWith('O') === false
 'Hello'.endsWith('l') === false
 'Hello'.endsWith('l', 4) === true
+```
+
+#### includes
+
+[http://people.mozilla.org//~jorendorff/es6-draft.html#sec-string.prototype.includes](http://people.mozilla.org//~jorendorff/es6-draft.html#sec-string.prototype.includes)
+
+```js
+'str'.includes('t') === true
+'str'.includes('sub') === false
+'substr'.includes('sub', 1) === false
+// String#contains availables as an alias of String#includes
+'str'.contains('t') === true
 ```
 
 #### isEmpty

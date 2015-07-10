@@ -70,6 +70,7 @@ describe('String', function () {
     }
 
     it('should return true if contains substr', function () {
+      includesTest('includes')
       includesTest('contains')
     })
   })
