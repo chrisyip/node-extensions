@@ -1,9 +1,11 @@
 module.exports = function (suites, options) {
-  var opts = options || { async: false }
+  var opts = options || {
+    async: false
+  }
 
   suites.forEach(function (suite) {
     suite
-      .on('cycle', function(event) {
+      .on('cycle', function (event) {
         var result = String(event.target)
 
         if (!event.target.error) {
@@ -14,7 +16,7 @@ module.exports = function (suites, options) {
 
         console.log(result)
       })
-      .on('complete', function() {
+      .on('complete', function () {
         console.log('Fastest is ' + this.filter('fastest').pluck('name'), '\n')
       })
       .run(opts)

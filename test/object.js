@@ -1,14 +1,16 @@
-/*jshint -W053 */
-
 var assert = require('assert')
 
 require('../lib/object')
 
-describe('Object', function(){
-  describe('#assign()', function(){
-    it('should contains keys of both objects', function(){
-      var target = { name: 'node' },
-          source = { title: 'ninja' }
+describe('Object', function () {
+  describe('#assign()', function () {
+    it('should contains keys of both objects', function () {
+      var target = {
+          name: 'node'
+        },
+        source = {
+          title: 'ninja'
+        }
 
       Object.assign(target, source)
 
@@ -22,10 +24,18 @@ describe('Object', function(){
     })
   })
 
-  describe('#merge()', function(){
-    it('should contains keys of both objects', function(){
-      var target = { person: { name: 'node' } },
-          source = { person: { title: 'ninja' } }
+  describe('#merge()', function () {
+    it('should contains keys of both objects', function () {
+      var target = {
+          person: {
+            name: 'node'
+          }
+        },
+        source = {
+          person: {
+            title: 'ninja'
+          }
+        }
 
       Object.merge(target, source)
 
@@ -39,8 +49,8 @@ describe('Object', function(){
     })
   })
 
-  describe('#isObject()', function(){
-    it('should return true if element is object', function(){
+  describe('#isObject()', function () {
+    it('should return true if element is object', function () {
       assert.equal(true, Object.isObject({}))
       assert.equal(false, Object.isObject(function () {}))
       assert.equal(false, Object.isObject(new Date()))
@@ -48,8 +58,8 @@ describe('Object', function(){
     })
   })
 
-  describe('#isNull()', function(){
-    it('should return true if element is object', function(){
+  describe('#isNull()', function () {
+    it('should return true if element is object', function () {
       assert.equal(true, Object.isNull(null))
       assert.equal(false, Object.isNull(undefined))
       assert.equal(false, Object.isNull(false))
@@ -58,8 +68,8 @@ describe('Object', function(){
     })
   })
 
-  describe('#isUndefined()', function(){
-    it('should return true if element is object', function(){
+  describe('#isUndefined()', function () {
+    it('should return true if element is object', function () {
       assert.equal(true, Object.isUndefined(undefined))
       assert.equal(false, Object.isUndefined(null))
       assert.equal(false, Object.isUndefined(false))

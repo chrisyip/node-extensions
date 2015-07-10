@@ -1,7 +1,7 @@
-var semver = require('semver'),
-    key = '__NODE_EXTENSIONS_VERSION__',
-    previousVersion = global[key] || '0.0.0',
-    pkg = require('./package.json')
+var semver = require('semver')
+var key = '__NODE_EXTENSIONS_VERSION__'
+var previousVersion = global[key] || '0.0.0'
+var pkg = require('./package.json')
 
 if (semver.gt(pkg.version, previousVersion)) {
   require('./lib/array')

@@ -4,20 +4,17 @@
   "description": "Useful properties and methods for node",
   "main": "index.js",
   "scripts": {
-    "mocha": "node --harmony node_modules/mocha/bin/_mocha --bail --check-leaks test/",
-    "mocha:cov": "node --harmony node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha --bail --check-leaks test/",
-    "test": "gulp lint && mocha --reporter nyan --bail --check-leaks test/",
-    "test-travis": "gulp lint && istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "mocha": "node --harmony node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha --bail --check-leaks test/",
+    "test": "npm run lint && npm run mocha"
   },
   "author": "Chris Yip <i@chrisyip.im>",
   "license": "MIT",
   "devDependencies": {
     "benchmark": "^1.0.0",
+    "eslint": "^0.24.0",
     "fast.js": "^0.1.1",
-    "gulp": "^3.8.9",
-    "gulp-jshint": "^1.8.5",
     "istanbul": "^0.3.2",
-    "jshint-stylish": "^1.0.0",
     "lodash": "^3.8.0",
     "mocha": "^2.0.0",
     "should": "^4.6.1"

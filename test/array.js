@@ -1,4 +1,4 @@
-/* jshint -W053 */
+/* eslint no-sparse-arrays: 0 */
 
 var assert = require('assert')
 
@@ -33,103 +33,250 @@ function filterTest (method) {
   })
 }
 
-describe('Array', function(){
-  describe('#contains', function() {
-    it('should return ture when element found in array', function() {
-      var obj = {}
-      var arr = [1, obj, 'foo', true]
+describe('Array', function () {
+  describe('#forEach', function () {
+    it('should iterate array from first item to last item', function () {
+      var arr = [1, 2, 3, 4]
+      var thisArg = { multiple: 3 }
+      var arr2 = arr.map(function (item) { return this.multiple * item }, thisArg)
 
-      arr.contains(1).should.be.true
-      arr.contains(true).should.be.true
-      arr.contains('foo').should.be.true
-      arr.contains(obj).should.be.true
-      arr.contains(1, -4).should.be.true
-      arr.contains(obj, -3).should.be.true
-      arr.contains(1, 'abc').should.be.true
-
-      arr.contains(obj, -2).should.be.false
-      arr.contains(false).should.be.false
-      arr.contains(1, 1).should.be.false
+      arr.forEach(function (item, i) {
+        assert.equal(item * this.multiple, arr2[i])
+      }, thisArg)
     })
   })
 
-  describe('#first', function() {
-    it('should return first element for non-empty array', function() {
+  describe('#forEachRight', function () {
+    it('should iterate array from last item to first item', function () {
+      var arr = [1, 2, 3, 4]
+      var thisArg = { multiple: 3 }
+      var arr2 = arr.map(function (item) { return this.multiple * item }, thisArg).reverse()
+      var i = 0
+
+      arr.forEachRight(function (item) {
+        assert.equal(item * this.multiple, arr2[i++])
+      }, thisArg)
+    })
+  })
+
+  describe('#some', function () {
+    it('should test whether some element in the array passes the test implemented by the provided function', function () {
+      var arr = [1, 2, 3, 4]
+      var thisArg = { multiple: 3 }
+      var index
+
+      var result = arr.some(function (item, i) {
+        index = i
+        return item * this.multiple === 9
+      }, thisArg)
+
+      assert.equal(index, 2)
+      assert.equal(result, true)
+    })
+  })
+
+  describe('#every', function () {
+    it('should test whether all elements in the array pass the test implemented by the provided function', function () {
+      var arr = [2, 4, 6]
+      assert.equal(true, arr.every(function (item) {
+        return !(item % 2)
+      }))
+
+      arr = [1, 3, 5]
+      assert.equal(true, arr.every(function (item) {
+        return !(item * this % 2)
+      }, 2))
+
+      var index
+      arr = ['foo', null, 'bar']
+      assert.equal(false, arr.every(function (item, i) {
+        index = i
+        return typeof item === 'string'
+      }))
+      assert.equal(1, index)
+    })
+  })
+
+  describe('#filter', function () {
+    it('should iterate array, and return a new array contains items that iterator returns true', function () {
+      var arr = [1, 2, 3, 4]
+      var thisArg = { multiple: 3 }
+      var arr2 = [1, 3]
+
+      var result = arr.filter(function (item) {
+        return item * this.multiple % 2
+      }, thisArg)
+
+      assert.deepEqual(result, arr2)
+    })
+  })
+
+  describe('#reduce', function () {
+    it('should apply a function against an accumulator and each value of the array (from left-to-right) has to reduce it to a single value', function () {
+      var arr = [1, 2, 3, 4]
+      var arr2 = arr.slice()
+
+      assert.deepEqual(10, arr.reduce(function (a, b, i) {
+        assert.equal(b, arr2[i])
+        return a + b
+      }))
+      assert.deepEqual(15, arr.reduce(function (a, b, i) {
+        assert.equal(b, arr2[i])
+        return a + b
+      }, 5))
+    })
+  })
+
+  describe('#reduceRight', function () {
+    it('should apply a function against an accumulator and each value of the array (from right-to-left) has to reduce it to a single value', function () {
+      var arr = [1, 2, 3, 4]
+      var arr2 = arr.slice()
+
+      assert.deepEqual(10, arr.reduceRight(function (a, b, i) {
+        assert.equal(b, arr2[i])
+        return a + b
+      }))
+
+      assert.deepEqual(15, arr.reduceRight(function (a, b, i) {
+        assert.equal(b, arr2[i])
+        return a + b
+      }, 5))
+    })
+  })
+
+  describe('#includes', function () {
+    function includesTest (key) {
+      var obj = {}
+      var arr = [1, obj, 'foo', true]
+
+      arr[key](1).should.be.true
+      arr[key](true).should.be.true
+      arr[key]('foo').should.be.true
+      arr[key](obj).should.be.true
+      arr[key](1, -4).should.be.true
+      arr[key](obj, -3).should.be.true
+      arr[key](1, 'abc').should.be.true
+
+      arr[key](obj, -2).should.be.false
+      arr[key](false).should.be.false
+      arr[key](1, 1).should.be.false
+    }
+
+    it('should return ture when element found in array', function () {
+      includesTest('contains')
+    })
+  })
+
+  describe('#first', function () {
+    it('should return first element for non-empty array', function () {
       assert.equal('str', ['str', 'sub'].first)
       assert.equal(1, [1].first)
       assert.equal(null, [null].first)
     })
 
-    it('should return undefined for empty array', function() {
+    it('should return undefined for empty array', function () {
       assert.equal(undefined, [].first)
     })
   })
 
-  describe('#last', function() {
-    it('should return last element for non-empty array', function() {
+  describe('#last', function () {
+    it('should return last element for non-empty array', function () {
       assert.equal('str', ['sub', 'str'].last)
       assert.equal(2, [1, 2].last)
       assert.equal(null, [true, null].last)
     })
 
-    it('should return undefined for empty array', function() {
+    it('should return undefined for empty array', function () {
       assert.equal(undefined, [].last)
     })
   })
 
-  describe('#isEmpty', function() {
-    it('should return false for non-empty array', function() {
+  describe('#isEmpty', function () {
+    it('should return false for non-empty array', function () {
       assert.equal(false, ['sub', 'str'].isEmpty)
       assert.equal(false, [, null].isEmpty)
     })
 
-    it('should return true for empty array', function() {
-      assert.equal(true, [ , , ].isEmpty)
+    it('should return true for empty array', function () {
+      assert.equal(true, [, , ].isEmpty)
       assert.equal(true, [].isEmpty)
     })
   })
 
-  describe('#isEmpty()', function() {
-    it('should return false for non-empty array', function() {
+  describe('#isEmpty()', function () {
+    it('should return false for non-empty array', function () {
       assert.equal(false, Array.isEmpty(['sub', 'str']))
       assert.equal(false, Array.isEmpty([, null]))
     })
 
-    it('should return true for empty array', function() {
-      assert.equal(true, Array.isEmpty([ , , ]))
+    it('should return true for empty array', function () {
+      assert.equal(true, Array.isEmpty([, , ]))
       assert.equal(true, Array.isEmpty([]))
     })
   })
 
-  describe('#isArrayLike()', function() {
-    it('should return true for array-like object', function() {
-      should(Array.isArrayLike({ 0: 1, length: 1 })).be.true
+  describe('#isArrayLike()', function () {
+    it('should return true for array-like object', function () {
+      should(Array.isArrayLike({
+        0: 1,
+        length: 1
+      })).be.true
       Array.isArrayLike('substr').should.be.true
       Array.isArrayLike('').should.be.true
-      Array.isArrayLike({ length: 0 }).should.be.true
-      Array.isArrayLike({ 0: 'foo', length: new Number(1) }).should.be.true
-      Array.isArrayLike({ 0: 'foo', length: '' }).should.be.true
-      Array.isArrayLike({ 0: 'foo', length: null }).should.be.true
-      Array.isArrayLike({ 0: 'foo', length: true }).should.be.true
-      Array.isArrayLike({ 0: 'foo', length: false }).should.be.true
+      Array.isArrayLike({
+        length: 0
+      }).should.be.true
+      Array.isArrayLike({
+        0: 'foo',
+        length: new Number(1)
+      }).should.be.true
+      Array.isArrayLike({
+        0: 'foo',
+        length: ''
+      }).should.be.true
+      Array.isArrayLike({
+        0: 'foo',
+        length: null
+      }).should.be.true
+      Array.isArrayLike({
+        0: 'foo',
+        length: true
+      }).should.be.true
+      Array.isArrayLike({
+        0: 'foo',
+        length: false
+      }).should.be.true
 
-      Array.isArrayLike({ 0: 'foo', length: new Number(1.2) }).should.be.false
-      Array.isArrayLike({ 0: 'foo', length: 1.2 }).should.be.false
-      Array.isArrayLike({ 0: 'foo', length: undefined }).should.be.false
+      Array.isArrayLike({
+        0: 'foo',
+        length: new Number(1.2)
+      }).should.be.false
+      Array.isArrayLike({
+        0: 'foo',
+        length: 1.2
+      }).should.be.false
+      Array.isArrayLike({
+        0: 'foo',
+        length: undefined
+      }).should.be.false
     })
   })
 
-  describe('#equalTo()', function(){
-    it('should return true for arrays that contains same elements', function(){
+  describe('#equalTo()', function () {
+    it('should return true for arrays that contains same elements', function () {
       var arr1 = [1, 'abc', true],
-          arr2 = [1, 'abc', true],
-          arr3 = [{ prop: true }],
-          arr4 = [{ prop: true }]
+        arr2 = [1, 'abc', true],
+        arr3 = [{
+          prop: true
+        }],
+        arr4 = [{
+          prop: true
+        }]
 
       assert.equal(true, arr1.equalTo(arr2))
       assert.equal(true, arr3.equalTo(arr4, function (a, b) {
         var keys1 = Object.keys(a),
-            keys2 = Object.keys(b)
+          keys2 = Object.keys(b)
 
         if (!keys1.equalTo(keys2)) {
           return false
@@ -152,10 +299,49 @@ describe('Array', function(){
     })
   })
 
-  describe('#find()', function(){
-    it('should return expected element', function(){
+  describe('#indexOf()', function () {
+    it('should return the first index at which a given element can be found in the array, or -1 if it is not present', function () {
+      var arr = [1, 2, 3, 3]
+      assert.equal(2, arr.indexOf(3))
+      assert.equal(-1, arr.indexOf(5))
+      assert.equal(2, arr.indexOf(3, 2))
+      assert.equal(-1, arr.indexOf(3, 4))
+      assert.equal(-1, arr.indexOf(3, 10))
+      assert.equal(3, arr.indexOf(3, -1))
+      assert.equal(2, arr.indexOf(3, -4))
+      assert.equal(2, arr.indexOf(3, -10))
+    })
+  })
+
+  describe('#lastIndexOf()', function () {
+    it('should return the last index at which a given element can be found in the array, or -1 if it is not present', function () {
+      var arr = [1, 2, 3, 3]
+      assert.equal(3, arr.lastIndexOf(3))
+      assert.equal(-1, arr.lastIndexOf(5))
+      assert.equal(2, arr.lastIndexOf(3, 2))
+      assert.equal(3, arr.lastIndexOf(3, 4))
+      assert.equal(3, arr.lastIndexOf(3, 10))
+      assert.equal(3, arr.lastIndexOf(3, -1))
+      assert.equal(-1, arr.lastIndexOf(3, -4))
+      assert.equal(-1, arr.lastIndexOf(3, -10))
+
+      assert.equal(2, arr.lastIndexOf(3, '2'))
+      assert.equal(3, arr.lastIndexOf(3, '4'))
+      assert.equal(3, arr.lastIndexOf(3, '-1'))
+      assert.equal(-1, arr.lastIndexOf(3, '-4'))
+      assert.equal(-1, arr.lastIndexOf(3, true))
+      assert.equal(-1, arr.lastIndexOf(3, false))
+      assert.equal(-1, arr.lastIndexOf(3, {}))
+      assert.equal(-1, arr.lastIndexOf(3, 'foo'))
+    })
+  })
+
+  describe('#find()', function () {
+    it('should return expected element', function () {
       var arr = [1, 'abc', true],
-          thisArg = { expected: 'abc' }
+        thisArg = {
+          expected: 'abc'
+        }
 
       assert.equal('abc', arr.find(function (elem) {
         return elem === 'abc'
@@ -171,10 +357,12 @@ describe('Array', function(){
     })
   })
 
-  describe('#findIndex()', function(){
-    it('should return expected element', function(){
+  describe('#findIndex()', function () {
+    it('should return expected element', function () {
       var arr = [1, 'abc', true],
-          thisArg = { expected: 'abc' }
+        thisArg = {
+          expected: 'abc'
+        }
 
       assert.equal(1, arr.findIndex(function (elem) {
         return elem === 'abc'
@@ -190,30 +378,46 @@ describe('Array', function(){
     })
   })
 
-  describe('#from()', function(){
-    it('should return new array', function(){
-      var arr = [1, 'abc', true],
-          obj = { 0: 1, 1: 'abc', 2: true, length: 3 },
-          obj2 = { 0: 1, 1: 'abc', length: 3 }
+  describe('#from()', function () {
+    it('should return new array', function () {
+      var arr = [1, 'abc', true]
+      var obj = {
+        0: 1,
+        1: 'abc',
+        2: true,
+        length: 3
+      }
+      var obj2 = {
+        0: 1,
+        1: 'abc',
+        length: 3
+      }
 
       assert.equal(true, Array.from(arr).equalTo(arr))
       assert.equal(true, Array.from(obj).equalTo(arr))
       assert.equal(false, Array.from(obj2).equalTo(arr))
+
+      var arr2 = [1, 2]
+      var thisArg = { multiple: 3 }
+      var arr3 = Array.from(arr2, function (item) {
+        return this.multiple * item
+      }, thisArg)
+      assert.deepEqual(arr2.map(function (item) { return item * thisArg.multiple }), arr3)
     })
   })
 
-  describe('#of()', function(){
-    it('should return new array', function(){
+  describe('#of()', function () {
+    it('should return new array', function () {
       var arr = [1, 'abc', true]
 
       assert.equal(true, Array.of(1, 'abc', true).equalTo(arr))
     })
   })
 
-  describe('#insert()', function(){
-    it('should insert element to specified position', function(){
+  describe('#insert()', function () {
+    it('should insert element to specified position', function () {
       var arr = [1, 'abc', true],
-          insertion = [1, 'abc', true]
+        insertion = [1, 'abc', true]
 
       insertion.insert('element', 1)
 
@@ -224,36 +428,36 @@ describe('Array', function(){
 
       insertion = ['foo', 'bar']
       insertion.insert('zoo', -1)
-      assert.equal(true, 'zoo' === insertion[1])
+      assert.equal(true, insertion[1] === 'zoo')
     })
 
-    it('should insert to the last position when position is undefined or NaN', function(){
+    it('should insert to the last position when position is undefined or NaN', function () {
       var insertion = [1, 'abc', true]
 
       insertion.insert('foo')
-      assert.equal(true, 'foo' === insertion[insertion.length - 1])
+      assert.equal(true, insertion[insertion.length - 1] === 'foo')
       insertion.insert('bar', 'NaN')
-      assert.equal(true, 'bar' === insertion[insertion.length - 1])
+      assert.equal(true, insertion[insertion.length - 1] === 'bar')
     })
 
-    it('should insert to the first position when (length - 1 - position) is less than zero', function(){
+    it('should insert to the first position when (length - 1 - position) is less than zero', function () {
       var insertion = [1, 'abc', true]
 
       insertion.insert('foo', -3)
-      assert.equal(true, 'foo' === insertion[0])
+      assert.equal(true, insertion[0] === 'foo')
     })
 
-    it('should return itself after insertion', function(){
+    it('should return itself after insertion', function () {
       var insertion = [1, 'abc', true]
 
       assert.equal(true, insertion === insertion.insert('element', 1))
     })
   })
 
-  describe('#remove()', function(){
-    it('should remove element start from specified position', function(){
+  describe('#remove()', function () {
+    it('should remove element start from specified position', function () {
       var arr = ['abc', 'abc', true],
-          removal = ['abc', 'abc', true]
+        removal = ['abc', 'abc', true]
 
       removal.remove('abc', 1)
 
@@ -266,7 +470,7 @@ describe('Array', function(){
       assert.equal(0, removal.lastIndexOf('efg'))
     })
 
-    it('should remove element from the first presented position of element when position is undefined or NaN', function(){
+    it('should remove element from the first presented position of element when position is undefined or NaN', function () {
       var removal = ['foo', 'bar', 'foo']
 
       removal.remove('foo')
@@ -277,46 +481,57 @@ describe('Array', function(){
       assert.equal(true, removal.indexOf('foo') === removal.lastIndexOf('foo'))
     })
 
-    it('should not remove element when cannot found element in array', function(){
+    it('should not remove element when cannot found element in array', function () {
       var removal = ['foo']
       assert.equal(true, removal.remove('bar') === undefined)
       assert.equal(true, removal.remove('foo', 1) === undefined)
     })
 
-    it('should return removed element after removal', function(){
-      var obj = { foo: 'bar' },
-          removal = [obj]
+    it('should return removed element after removal', function () {
+      var obj = {
+          foo: 'bar'
+        },
+        removal = [obj]
 
       assert.equal(true, obj === removal.remove(obj))
     })
   })
 
-  describe('#flatten()', function(){
-    it('should flatten whole array, even array-like', function(){
-      var arr = [1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten()
+  describe('#flatten()', function () {
+    it('should flatten whole array, even array-like', function () {
+      var arr = [1, [2, [3, [4, {
+        0: 5,
+        length: 1
+      }]]]].flatten()
 
       assert.equal(true, [1, 2, 3, 4, 5].every(function (item, i) {
-        arr[i] === item
+        return arr[i] === item
       }))
     })
 
-    it('original array should be untouched', function(){
-      var obj = { 0: 5, length: 1 },
-          arr = [1, [2, [3, [4, obj]]]],
-          backup = [1, [2, [3, [4, obj]]]]
+    it('original array should be untouched', function () {
+      var obj = {
+          0: 5,
+          length: 1
+        },
+        arr = [1, [2, [3, [4, obj]]]],
+        backup = [1, [2, [3, [4, obj]]]]
 
       arr.flatten()
 
       assert.equal(true, arr.every(function (item, i) {
-        backup[i] === item
+        return assert.deepEqual(item, backup[i])
       }))
     })
 
-    it('should return flattened array', function(){
-      var arr = [1, [2, [3, [4, { 0: 5, length: 1 }]]]].flatten()
+    it('should return flattened array', function () {
+      var arr = [1, [2, [3, [4, {
+        0: 5,
+        length: 1
+      }]]]].flatten()
 
       assert.equal(false, arr.some(function (item) {
-        return Array.isArray(item) || (typeof item == 'object' && [].toString.call(item.length) == '[object Number]')
+        return Array.isArray(item) || typeof item == 'object' && [].toString.call(item.length) == '[object Number]'
       }))
 
       assert.equal(5, arr.length)
@@ -329,8 +544,8 @@ describe('Array', function(){
     })
   })
 
-  describe('#compact()', function(){
-    it('should create a new array that all undefined and null elements removed', function(){
+  describe('#compact()', function () {
+    it('should create a new array that all undefined and null elements removed', function () {
       var arr = [1, , null, 2].compact()
 
       assert.equal(2, arr.length)
