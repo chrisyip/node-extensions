@@ -1,6 +1,6 @@
 {
   "name": "node-extensions",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Useful properties and methods for node",
   "main": "index.js",
   "scripts": {
