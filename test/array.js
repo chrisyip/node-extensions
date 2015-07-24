@@ -377,6 +377,16 @@ describe('Array', function () {
       assert.equal('abc', arr.find(function (elem) {
         return this.expected === elem
       }, thisArg))
+
+      var obj = { foo: 'bar' }
+      var index = -1
+      arr = [1, obj, { foo: 'bar' }]
+      var result = arr.find(function (item, i) {
+        index = i
+        return item.foo
+      })
+      assert.equal(obj, result)
+      assert.equal(1, index)
     })
   })
 
@@ -398,6 +408,18 @@ describe('Array', function () {
       assert.equal(1, arr.findIndex(function (elem) {
         return this.expected === elem
       }, thisArg))
+
+      var obj = { foo: 'bar' }
+      arr = [1, obj, { foo: 'bar' }]
+      var result
+      var index = arr.findIndex(function (item) {
+        if (item.foo) {
+          result = item
+          return true
+        }
+      })
+      assert.equal(obj, result)
+      assert.equal(1, index)
     })
   })
 
