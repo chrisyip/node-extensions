@@ -72,6 +72,16 @@ describe('Array', function () {
 
       assert.equal(index, 2)
       assert.equal(result, true)
+      assert.equal(true, arr.some(function (item) { return item }))
+
+      index = -1
+      arr = [0, 1, 0]
+      result = arr.some(function (item, i) {
+        index = i
+        return item
+      })
+      assert.equal(1, index)
+      assert.equal(true, result)
     })
   })
 
@@ -93,6 +103,18 @@ describe('Array', function () {
         index = i
         return typeof item === 'string'
       }))
+      assert.equal(1, index)
+
+      arr = [1, 2, 3]
+      assert.equal(true, arr.every(function (item) { return item }))
+
+      arr = [1, 0, 3]
+      index = -1
+      var result = arr.every(function (item, i) {
+        index = i
+        return item
+      })
+      assert.equal(false, result)
       assert.equal(1, index)
     })
   })
@@ -521,7 +543,8 @@ describe('Array', function () {
       arr.flatten()
 
       assert.equal(true, arr.every(function (item, i) {
-        return assert.deepEqual(item, backup[i])
+        assert.deepEqual(item, backup[i])
+        return true
       }))
     })
 
