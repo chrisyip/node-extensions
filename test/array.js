@@ -200,6 +200,15 @@ describe('Array', function () {
     it('should return undefined for empty array', function () {
       assert.equal(undefined, [].first)
     })
+
+    it('should can be orverriden', function () {
+      var arr = [1, 2]
+      arr.first = function () {
+        return this[this.length - 1]
+      }
+      assert.equal('function', typeof arr.first)
+      assert.equal(2, arr.first())
+    })
   })
 
   describe('#last', function () {
@@ -211,6 +220,15 @@ describe('Array', function () {
 
     it('should return undefined for empty array', function () {
       assert.equal(undefined, [].last)
+    })
+
+    it('should can be orverriden', function () {
+      var arr = [1, 2]
+      arr.last = function () {
+        return this[0]
+      }
+      assert.equal('function', typeof arr.last)
+      assert.equal(1, arr.last())
     })
   })
 
