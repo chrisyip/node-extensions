@@ -336,16 +336,18 @@ String.isString(true) === false
 #### interpolate
 
 ```js
-'Good morning, #{title} #{lastname}.'.interpolate({
+'Good morning, ${title} #{lastname}.'.interpolate({
     title: 'Mr.',
-    firstname: 'John',
     lastname: 'Smith'
 })
-// 'Good morning, Mr. Smith.'
-
-'Good morning, #{0} #{2}.'.interpolate(['Mr.', 'John', 'Smith'])
-// 'Good morning, Mr. Smith.'
+'Good morning, ${0} #{2}.'.tpl(['Mr.', 'John', 'Smith'])
+'Good morning, ${0} #{2}.'.template('Mr.', 'John', 'Smith')
+// all outputs 'Good morning, Mr. Smith.'
 ```
+
+You can use `$` and `#` for defining parameters.
+
+Aliases: `String#tpl()` & `String#template()`
 
 #### repeat
 

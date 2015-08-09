@@ -1,5 +1,7 @@
 var assert = require('assert')
 
+require('should')
+
 require('../lib/string')
 
 describe('String', function () {
@@ -44,7 +46,7 @@ describe('String', function () {
   })
 
   describe('#interpolate()', function () {
-    it('should return new string with specicied variables', function () {
+    it('should return embedded string with specified variables', function () {
       var result = 'Hello, Node Ninja'
 
       assert.equal(true, 'Hello, #{name} #{title}'.interpolate({
@@ -52,13 +54,17 @@ describe('String', function () {
         title: 'Ninja'
       }) === result)
 
-      assert.equal(true, 'Hello, #{0} #{1}'.interpolate(['Node', 'Ninja']) === result)
+      assert.equal(true, 'Hello, ${0} #{1}'.tpl(['Node', 'Ninja']) === result)
+      assert.equal(true, 'Hello, ${0} #{1}'.tpl('Node', 'Ninja') === result)
+
+      'Hello, ${name}'.template({ name: 'John' }).should.be.eql('Hello, John')
     })
 
     it('should return itself if no var name found', function () {
-      'foo'.interpolate({
-        foo: 'bar'
-      }).should.be.eql('foo')
+      var str = 'The quick brown fox jumps over the lazy dog'
+      var result = str.interpolate({ quick: 'fast' })
+      str.should.be.eql(result)
+      result.should.be.a.String()
     })
   })
 
