@@ -99,13 +99,6 @@ describe('Object', function () {
       keys.length.should.be.eql(1)
       result[keys[0]].should.be.eql(input[keys[0]])
 
-      result = input.filter(function (value, key) {
-        return key.indexOf('bar') === 0
-      })
-      keys = Object.keys(result)
-      keys.length.should.be.eql(1)
-      result[keys[0]].should.be.eql(input[keys[0]])
-
       result = input.pick(function (value, key) {
         return this.prefix + key === 'foobar'
       }, { prefix: 'foo' })
@@ -119,13 +112,6 @@ describe('Object', function () {
       keys = Object.keys(result)
       keys.length.should.be.eql(1)
       result[keys[0]].should.be.eql(input[keys[0]])
-
-      result = Object.filter(input, 'foo', 'bar')
-      keys = Object.keys(result)
-      keys.length.should.be.eql(2)
-      keys.every(function (key) {
-        return result[key] === input[key]
-      }).should.be.true()
 
       result = input.pick(['foo', 'bar'])
       keys = Object.keys(result)

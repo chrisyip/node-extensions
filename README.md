@@ -108,8 +108,6 @@ obj.pick((value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' )
 // { bar: 'bar', baz: 'baz' }
 ```
 
-Alias: `Object#filter()`.
-
 ## Array
 
 ### Properties
