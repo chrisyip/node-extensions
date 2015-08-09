@@ -26,17 +26,13 @@
       2,
       "inside"
     ],
-    "generator-star": [
-      2,
-      "start"
-    ],
     "no-div-regex": 1,
     "strict": 0,
     "space-after-keywords": [
       2,
       "always"
     ],
-    "no-reserved-keys": 2,
+    "quote-props": [2, "as-needed"],
     "no-process-exit": 0,
     "no-new-require": 2,
     "no-mixed-requires": 2,
@@ -48,8 +44,8 @@
       "always"
     ],
     "no-trailing-spaces": 2,
-    "no-wrap-func": 1,
-    "space-before-function-parentheses": [
+    "no-extra-parens": 1,
+    "space-before-function-paren": [
       2,
       "always"
     ],

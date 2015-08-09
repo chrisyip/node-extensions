@@ -12,12 +12,12 @@
   "license": "MIT",
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "eslint": "^0.24.0",
+    "eslint": "^1.1.0",
     "fast.js": "^0.1.1",
-    "istanbul": "^0.3.2",
-    "lodash": "^3.8.0",
-    "mocha": "^2.0.0",
-    "should": "^4.6.1"
+    "istanbul": "^0.3.17",
+    "lodash": "^3.10.1",
+    "mocha": "^2.2.5",
+    "should": "^7.0.2"
   },
   "directories": {
     "test": "test"
@@ -37,6 +37,6 @@
   },
   "homepage": "https://github.com/chrisyip/node-extensions",
   "dependencies": {
-    "semver": "^4.3.4"
+    "semver": "^5.0.0"
   }
 }
