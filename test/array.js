@@ -570,6 +570,9 @@ describe('Array', function () {
       assert.equal(true, [1, 2, 3, 4, 5].every(function (item, i) {
         return arr[i] === item
       }))
+
+      arr = ['foo']
+      should.deepEqual(arr, arr.flatten())
     })
 
     it('original array should be untouched', function () {
