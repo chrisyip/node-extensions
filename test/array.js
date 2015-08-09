@@ -624,6 +624,26 @@ describe('Array', function () {
     filterTest('compact')
   })
 
+  describe('#pluck()', function () {
+    it('should create a collection of property value of path in all elements', function () {
+      var arr = [{ name: 'John' }, { name: 'Jane' }, { name: 'Max' }]
+      should.deepEqual(arr.pluck('name'), ['John', 'Jane', 'Max'])
+    })
+
+    it('should auto convert path to string value', function () {
+      var obj = {}
+      obj[{}] = 'foo'
+      should.deepEqual([obj].pluck({}), ['foo'])
+    })
+
+    it('should create a collection with same size of original collection', function () {
+      var arr = [1, 2, 3, 4]
+      var result = arr.pluck()
+      result.length.should.be.eql(arr.length)
+      should.deepEqual(result, [undefined, undefined, undefined, undefined])
+    })
+  })
+
   describe('#slice()', function () {
     it('should return a shallow copy of a portion of an array into a new array object', function () {
       var arr = [1, 2, 3, 4, 5, 6]

@@ -275,6 +275,16 @@ Array.of(1, 2, 3);   // [1, 2, 3]
 Array.of(undefined); // [undefined]
 ```
 
+#### pluck
+
+Creates a collection for property values of path in all elements
+
+```js
+var members = [{ name: 'John', gender: 'male' }, { name: 'Jane', gender: 'female' }]
+members.pluck('name')
+// ['John', 'Jane']
+```
+
 #### remove
 
 ```js
