@@ -623,4 +623,44 @@ describe('Array', function () {
 
     filterTest('compact')
   })
+
+  describe('#slice()', function () {
+    it('should return a shallow copy of a portion of an array into a new array object', function () {
+      var arr = [1, 2, 3, 4, 5, 6]
+      var obj = {
+        0: 1,
+        1: 2,
+        2: 3,
+        3: 4,
+        4: 5,
+        5: 6,
+        length: 6
+      }
+
+      should.deepEqual(arr.slice.call(obj), arr)
+      should.deepEqual(arr.slice(), arr)
+      should.deepEqual(arr.slice(1), [2, 3, 4, 5, 6])
+      should.deepEqual(arr.slice(8), [])
+      should.deepEqual(arr.slice(-1), [6])
+      should.deepEqual(arr.slice(-4), [3, 4, 5, 6])
+      should.deepEqual(arr.slice(-7), arr)
+
+      should.deepEqual(arr.slice(-1, 0), [])
+      should.deepEqual(arr.slice(-1, 5), [])
+      should.deepEqual(arr.slice(-1, 6), [6])
+      should.deepEqual(arr.slice(-4, -1), [3, 4, 5])
+      should.deepEqual(arr.slice(-4, 0), [])
+      should.deepEqual(arr.slice(-4, 6), [3, 4, 5, 6])
+      should.deepEqual(arr.slice(-4, 9), [3, 4, 5, 6])
+      should.deepEqual(arr.slice(-4, 4), [3, 4])
+      should.deepEqual(arr.slice(-7, 2), [1, 2])
+      should.deepEqual(arr.slice(-7, 9), arr)
+
+      should.deepEqual(arr.slice(0, 8), arr)
+      should.deepEqual(arr.slice(0, 2), [1, 2])
+      should.deepEqual(arr.slice(0, -4), [1, 2])
+      should.deepEqual(arr.slice(0, -2), [1, 2, 3, 4])
+      should.deepEqual(arr.slice(0, -6), [])
+    })
+  })
 })

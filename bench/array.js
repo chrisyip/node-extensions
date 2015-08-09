@@ -17,7 +17,8 @@ var comparableMethods = [
   'indexOf',
   'lastIndexOf',
   'find',
-  'findIndex'
+  'findIndex',
+  'slice'
 ]
 
 comparableMethods.forEach(function (prop) {
@@ -167,6 +168,56 @@ var thisArg = {}
     })
     .add('lodash         ', function () {
       _[prop](arr, callback, 3)
+    })
+
+  suites.push(suite)
+})
+
+;['slice'].forEach(function (prop) {
+  var suite = new Benchmark.Suite()
+
+  suite
+    .on('start', function () {
+      console.log(prop, 'on array')
+    })
+    .add('native         ', function () {
+      arr['_' + prop](1)
+    })
+    .add('node-extensions', function () {
+      arr[prop](1)
+    })
+    .add('fast.js        ', function () {
+      fast[prop](arr, 1)
+    })
+    .add('lodash         ', function () {
+      _[prop](arr, 1)
+    })
+
+  suites.push(suite)
+})
+
+;['slice'].forEach(function (prop) {
+  var suite = new Benchmark.Suite()
+
+  var obj = {
+    0: 1, 1: 2, 2: 3, length: 3
+  }
+
+  suite
+    .on('start', function () {
+      console.log(prop, 'on obj')
+    })
+    .add('native         ', function () {
+      arr['_' + prop].call(obj, 1)
+    })
+    .add('node-extensions', function () {
+      arr[prop].call(obj, 1)
+    })
+    .add('fast.js        ', function () {
+      fast[prop](obj, 1)
+    })
+    .add('lodash         ', function () {
+      _[prop](obj, 1)
     })
 
   suites.push(suite)
