@@ -1,5 +1,7 @@
 var assert = require('assert')
 
+require('should')
+
 require('../lib/object')
 
 describe('Object', function () {
@@ -75,6 +77,62 @@ describe('Object', function () {
       assert.equal(false, Object.isUndefined(false))
       assert.equal(false, Object.isUndefined({}))
       assert.equal(false, Object.isUndefined(0))
+    })
+  })
+
+  describe('#pick()', function () {
+    it('should return true if element is object', function () {
+      var input = {
+        foo: 'foo',
+        bar: 'bar',
+        foobar: 'foobar',
+        baz: 'baz'
+      }
+
+      input[{}] = 'object'
+
+      var result, keys
+      var keys1 = ['foo', 'bar']
+
+      result = input.pick('foo')
+      keys = Object.keys(result)
+      keys.length.should.be.eql(1)
+      result[keys[0]].should.be.eql(input[keys[0]])
+
+      result = input.filter(function (value, key) {
+        return key.indexOf('bar') === 0
+      })
+      keys = Object.keys(result)
+      keys.length.should.be.eql(1)
+      result[keys[0]].should.be.eql(input[keys[0]])
+
+      result = input.pick(function (value, key) {
+        return this.prefix + key === 'foobar'
+      }, { prefix: 'foo' })
+      keys = Object.keys(result)
+      keys.length.should.be.eql(1)
+      result[keys[0]].should.be.eql(input[keys[0]])
+
+      result = Object.pick(input, function (value, key) {
+        return this.prefix + key === 'foobar'
+      }, { prefix: 'foo' })
+      keys = Object.keys(result)
+      keys.length.should.be.eql(1)
+      result[keys[0]].should.be.eql(input[keys[0]])
+
+      result = Object.filter(input, 'foo', 'bar')
+      keys = Object.keys(result)
+      keys.length.should.be.eql(2)
+      keys.every(function (key) {
+        return result[key] === input[key]
+      }).should.be.true()
+
+      result = input.pick(['foo', 'bar'])
+      keys = Object.keys(result)
+      keys.length.should.be.eql(2)
+      keys.every(function (key) {
+        return result[key] === input[key]
+      }).should.be.true()
     })
   })
 })

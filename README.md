@@ -87,6 +87,29 @@ Object.merge(
 // { project: { type: 'node', name: 'node-extensions' } }
 ```
 
+#### pick
+
+Creates a new object that only contain specific keys.
+
+```js
+let obj = {
+  foo: 'foo',
+  bar: 'bar',
+  baz: 'baz'
+}
+
+obj.pick('foo', 'bar')
+obj.pick(['foo', 'bar'])
+Object.pick(obj, 'foo', 'bar')
+// { foo: 'foo', bar: 'bar' }
+
+obj.pick((value, key) => key.startsWith('ba'))
+obj.pick((value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' )
+// { bar: 'bar', baz: 'baz' }
+```
+
+Alias: `Object#filter()`.
+
 ## Array
 
 ### Properties
@@ -229,7 +252,7 @@ Array.isEmpty([ , ]) === true
 
 #### Iterators
 
-`forEach`, `map`, `every`, `some`, `filter`, `reduce`, `reduceRight`, `indexOf`, and `lastIndexOf` are overried for performance concerned.
+`forEach`, `map`, `every`, `some`, `filter`, `reduce`, `reduceRight`, `indexOf`, `lastIndexOf` and 'slice' are overrided for performance concerned.
 
 The new methods are faster than built-in methods. By overriding the built-in methods, the general performances of using built-in methods should be improved. More details: [benchmarks](https://github.com/chrisyip/node-extensions/blob/master/bench/results).
 
