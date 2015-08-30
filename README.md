@@ -51,6 +51,21 @@ Object.assign(
 // { type: 'node', name: 'node-extensions' }
 ```
 
+#### hasProps
+
+```js
+let obj = {
+  foo: {
+    bar: {
+      baz: 'baz'
+    }
+  }
+}
+
+Object.hasProps(obj, 'foo.bar.baz') // true
+Object.hasProps(obj, 'foo.bar.foobar') // false
+```
+
 #### isObject
 
 ```js
@@ -98,15 +113,31 @@ let obj = {
   baz: 'baz'
 }
 
-obj.pick('foo', 'bar')
-obj.pick(['foo', 'bar'])
 Object.pick(obj, 'foo', 'bar')
+Object.pick(obj, ['foo', 'bar'])
 // { foo: 'foo', bar: 'bar' }
 
-obj.pick((value, key) => key.startsWith('ba'))
-obj.pick((value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' )
+Object.pick(obj, (value, key) => key.startsWith('ba'))
+Object.pick(obj, (value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' )
 // { bar: 'bar', baz: 'baz' }
 ```
+
+
+#### props
+
+```js
+let obj = {
+  foo: {
+    bar: {
+      baz: 'baz'
+    }
+  }
+}
+
+Object.props(obj, 'foo.bar.baz') // 'baz'
+Object.props(obj, 'foo.bar.foobar') // undefined
+```
+
 
 ## Array
 

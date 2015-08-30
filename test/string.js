@@ -102,6 +102,7 @@ describe('String', function () {
       assert.equal(true, String.isString('node ninja'))
       assert.equal(true, String.isString(new String('node ninja')))
       assert.equal(false, String.isString(true))
+      assert.equal(false, String.isString({ foo: 'bar' }))
     })
   })
 

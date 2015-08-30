@@ -121,4 +121,46 @@ describe('Object', function () {
       }).should.be.true()
     })
   })
+
+  describe('#props()', function () {
+    it('should return the value for the last prop in the props chain', function () {
+      var foo = {
+        foo: {
+          bar: {
+            baz: 'baz'
+          }
+        }
+      }
+      var bar = {
+        foobar: 'foobar'
+      }
+      foo[bar] = 'bar'
+
+      assert.equal('baz', Object.props(foo, 'foo.bar.baz'))
+      assert.equal('bar', Object.props(foo, bar))
+      assert.equal(undefined, Object.props(foo, 'foo.baz'))
+      assert.equal('bar', Object.props(foo, {}))
+    })
+  })
+
+  describe('#hasProps()', function () {
+    it('should return the true if the last prop found in the props chain', function () {
+      var foo = {
+        foo: {
+          bar: {
+            baz: 'baz'
+          }
+        }
+      }
+      var bar = {
+        foobar: 'foobar'
+      }
+      foo[bar] = 'bar'
+
+      assert.equal(true, Object.hasProps(foo, 'foo.bar.baz'))
+      assert.equal(true, Object.hasProps(foo, bar))
+      assert.equal(false, Object.hasProps(foo, 'foo.baz'))
+      assert.equal(true, Object.hasProps(foo, {}))
+    })
+  })
 })
