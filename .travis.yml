@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - iojs-v1
   - iojs-v2
+  - iojs-v3
   - 0.12
   - 0.10
 matrix:
@@ -9,4 +10,7 @@ matrix:
     - node_js: "0.10"
   fast_finish: true
 script: "npm run-script test"
-after_script: "npm install coveralls && cat ./coverage/lcov.info | coveralls"
+after_script:
+  - "npm install coveralls codecov.io"
+  - "cat ./coverage/lcov.info | coveralls"
+  - "cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js"
