@@ -13,6 +13,13 @@ describe('String', function () {
       assert.equal(true, 'hello_world'.toCamelCase() === 'helloWorld')
       assert.equal(true, 'hello.world'.toCamelCase() === 'hello.world')
       assert.equal(true, 'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld')
+
+      assert.equal(true, 'hello   world'.toCamelCase(true) === 'HelloWorld')
+      assert.equal(true, 'hello----world'.toCamelCase(true) === 'HelloWorld')
+      assert.equal(true, 'hello___world'.toCamelCase(true) === 'HelloWorld')
+      assert.equal(true, 'hello_world'.toCamelCase(true) === 'HelloWorld')
+      assert.equal(true, 'hello.world'.toCamelCase(true) === 'Hello.world')
+      assert.equal(true, 'hello.nodejs   world'.toCamelCase(true) === 'Hello.nodejsWorld')
     })
   })
 

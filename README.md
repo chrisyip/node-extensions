@@ -441,6 +441,14 @@ Aliases: `String#tpl()` & `String#template()`
 'hello_world'.toCamelCase() === 'helloWorld'
 'hello.world'.toCamelCase() === 'hello.world'
 'hello.nodejs   world'.toCamelCase() === 'hello.nodejsWorld'
+
+// Make first letter camel cased
+'hello   world'.toCamelCase(true) === 'HelloWorld'
+'hello----world'.toCamelCase(true) === 'HelloWorld'
+'hello___world'.toCamelCase(true) === 'HelloWorld'
+'hello_world'.toCamelCase(true) === 'HelloWorld'
+'hello.world'.toCamelCase(true) === 'Hello.world'
+'hello.nodejs   world'.toCamelCase(true) === 'Hello.nodejsWorld'
 ```
 
 #### toCapitalCase
