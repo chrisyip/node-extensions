@@ -9,3 +9,9 @@ console.log('Running Array benchmarks...\n')
 var array = require('./array')
 
 array.run()
+
+console.log('Running Function benchmarks...\n')
+
+var func = require('./function')
+
+func.run()
