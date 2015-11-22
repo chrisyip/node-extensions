@@ -488,6 +488,42 @@ Function.isFunction({}) === false
 
 **Symbol is not supported.**
 
+## Number
+
+### Methods
+
+#### isFloat
+
+```js
+Number.isFloat(1.1) === true
+Number.isFloat(-1.1) === true
+
+Number.isFloat(1) === false
+Number.isFloat(-1) === false
+Number.isFloat(0) === false
+Number.isFloat(1.0) === false
+Number.isFloat('') === false
+Number.isFloat('0') === false
+Number.isFloat(NaN) === false
+Number.isFloat(true) === false
+```
+
+#### isInteger
+
+[http://www.ecma-international.org/ecma-262/6.0/#sec-number.isinteger](http://www.ecma-international.org/ecma-262/6.0/#sec-number.isinteger)
+
+```js
+Number.isInteger(1) === true
+Number.isInteger(-1) === true
+Number.isInteger(0) === true
+Number.isInteger(1.0) === true
+
+Number.isInteger(1.1) === false
+Number.isInteger('') === false
+Number.isInteger('0') === false
+Number.isInteger(NaN) === false
+Number.isInteger(true) === false
+```
 
 # Notes
 
