@@ -118,10 +118,9 @@ Object.pick(obj, ['foo', 'bar'])
 // { foo: 'foo', bar: 'bar' }
 
 Object.pick(obj, (value, key) => key.startsWith('ba'))
-Object.pick(obj, (value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' )
+Object.pick(obj, (value, key) => key.startsWith(this.prefix) }, { prefix: 'ba' })
 // { bar: 'bar', baz: 'baz' }
 ```
-
 
 #### props
 
