@@ -140,6 +140,9 @@ describe('Object', function () {
       assert.equal('bar', Object.props(foo, bar))
       assert.equal(undefined, Object.props(foo, 'foo.baz'))
       assert.equal('bar', Object.props(foo, {}))
+      assert.equal(undefined, Object.props(undefined, 'foo.bar'))
+      assert.equal(undefined, Object.props(null, 'foo.bar'))
+      assert.equal(undefined, Object.props({ foo: undefined }, 'foo.bar'))
     })
   })
 
