@@ -185,6 +185,18 @@ Like Ruby's [Array#compact()](http://www.ruby-doc.org/core-2.1.3/Array.html#meth
 }) // ['foo', 'bar']
 ```
 
+#### collect(callback, thisArg)
+
+```js
+[1, undefined, null, 2].collect(item => item) // [1, null, 2]
+
+['foo', 'bar', 1, 2].collect(item => {
+  if (String.isString(item)) {
+    return item + 'baz'
+  }
+}) // ['foobaz', 'barbaz']
+```
+
 #### equalTo
 
 `equalTo(target, mapfn, thisArg)`

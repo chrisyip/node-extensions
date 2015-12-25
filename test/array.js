@@ -438,6 +438,10 @@ describe('Array', function () {
       })
       assert.equal(obj, result)
       assert.equal(1, index)
+
+      assert.equal(-1, [0].findIndex(function (item) {
+        return item === 1
+      }))
     })
   })
 
@@ -681,6 +685,34 @@ describe('Array', function () {
       should.deepEqual(arr.slice(0, -4), [1, 2])
       should.deepEqual(arr.slice(0, -2), [1, 2, 3, 4])
       should.deepEqual(arr.slice(0, -6), [])
+    })
+  })
+
+  describe('#collect()', function () {
+    it('should collect any value that is not undefined', function () {
+      var a = [1, null, undefined, 'foo', true]
+      var b = [1, null, 'foo', true]
+
+      should.deepEqual(a.collect(function (item) {
+        return item
+      }), b)
+
+      a = [1, 2, 3, 4]
+      b = [2, 6]
+
+      should.deepEqual(a.collect(function (item) {
+        if (item % 2) {
+          return item * 2
+        }
+      }), b)
+
+      a = [1, 2]
+      b = ['foo2']
+      should.deepEqual(a.collect(function (item) {
+        if (item % 2) {
+          return this + item * 2
+        }
+      }, 'foo'), b)
     })
   })
 })
