@@ -356,6 +356,16 @@ Boolean.isBoolean('true') // false
 
 ### Methods
 
+#### caseCmp
+
+Like Ruby's [`casecmp`](http://ruby-doc.org/core-2.1.0/String.html).
+
+```js
+'foo'.caseCmp('FOo') // true
+'foo'.caseCmp(new String('foo')) // false
+'foo'.caseCmp('FOo', true) // false
+```
+
 #### endsWith
 
 [http://people.mozilla.org/\~jorendorff/es6-draft.html#sec-string.prototype.startswith](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype.endswith)

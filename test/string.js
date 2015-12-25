@@ -136,4 +136,24 @@ describe('String', function () {
       assert.equal('*****', '*'.repeat(5))
     })
   })
+
+  describe('#caseCmp()', function () {
+    it('should return true if two strings are the same', function () {
+      assert.equal(true, 'foo'.caseCmp('FoO'))
+      assert.equal(true, new String('foo').caseCmp('FoO'))
+      assert.equal(true, new String('foo').caseCmp(new String('FoO')))
+      assert.equal(true, 'foo'.caseCmp(new String('FoO')))
+      assert.equal(true, 'foo Bar'.caseCmp('Foo bAR'))
+      assert.equal(true, 'foo '.caseCmp('foo '))
+
+      assert.equal(true, 'foo'.caseCmp('foo', true))
+      assert.equal(true, new String('foo').caseCmp('foo', true))
+      assert.equal(true, new String('foo').caseCmp(new String('foo'), true))
+      assert.equal(true, 'foo'.caseCmp(new String('foo'), true))
+      assert.equal(true, 'FoO'.caseCmp('FoO', true))
+
+      assert.equal(false, 'FoO'.caseCmp('Foo', true))
+      assert.equal(false, 'foo'.caseCmp('Foo', true))
+    })
+  })
 })
