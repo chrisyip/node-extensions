@@ -12,6 +12,9 @@ describe('Function', function () {
         assert.equal(thisArg, this)
       }
       fn.bind(thisArg)()
+
+      thisArg = global
+      fn.bind(thisArg)()
     })
 
     it('should prepend arguments', function () {
