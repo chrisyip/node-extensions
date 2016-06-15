@@ -33,6 +33,14 @@ if (fruits.isEmpty === false) {
 'the great gatsby'.toCapitalCase() // 'the Great Gatsby'
 ```
 
+## Browser
+
+Please use module bundler like Browserify or Webpack:
+
+```
+require('node-extensions/browser')
+```
+
 # APIs
 
 ## Object
