@@ -1,0 +1,6 @@
+require('./lib/array')
+require('./lib/boolean')
+require('./lib/function')
+require('./lib/number')
+require('./lib/object')
+require('./lib/string')
