@@ -440,6 +440,13 @@ You can use `$` and `#` for defining parameters.
 
 Aliases: `String#tpl()` & `String#template()`
 
+#### padStart / padEnd
+
+```js
+'foo'.padStart(10, 'bar') // barbarbfoo
+'foo'.padEnd(10, 'bar') // foobarbarb
+```
+
 #### repeat
 
 [http://people.mozilla.org/\~jorendorff/es6-draft.html#sec-string.prototype.repeat](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype.repeat)

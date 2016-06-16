@@ -169,4 +169,36 @@ describe('String', function () {
       assert.equal(false, 'foo'.caseCmp('Foo', true))
     })
   })
+
+  describe('#padStart()', function () {
+    it('should pads string with a given string', function () {
+      var str = 'foo'
+
+      assert.equal(str.padStart(10), '       foo')
+      assert.equal(str.padStart(10, undefined), '       foo')
+      assert.equal(str.padStart(10, null), 'nullnulfoo')
+      assert.equal(str.padStart(10, true), 'truetrufoo')
+      assert.equal(str.padStart(10, 1), '1111111foo')
+      assert.equal(str.padStart(10, 'bar'), 'barbarbfoo')
+      assert.equal(str.padStart(10, {}), '[objectfoo')
+      assert.equal(str.padStart(10, []), 'foo')
+      assert.equal(str.padStart(10, /\s/), '/\\s//\\sfoo')
+    })
+  })
+
+  describe('#padEnd()', function () {
+    it('should pads string with a given string', function () {
+      var str = 'foo'
+
+      assert.equal(str.padEnd(10), 'foo       ')
+      assert.equal(str.padEnd(10, undefined), 'foo       ')
+      assert.equal(str.padEnd(10, null), 'foonullnul')
+      assert.equal(str.padEnd(10, true), 'footruetru')
+      assert.equal(str.padEnd(10, 1), 'foo1111111')
+      assert.equal(str.padEnd(10, 'bar'), 'foobarbarb')
+      assert.equal(str.padEnd(10, {}), 'foo[object')
+      assert.equal(str.padEnd(10, []), 'foo')
+      assert.equal(str.padEnd(10, /\s/), 'foo/\\s//\\s')
+    })
+  })
 })
