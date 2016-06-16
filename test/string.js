@@ -134,6 +134,19 @@ describe('String', function () {
   describe('#repeat()', function () {
     it('should return new string that repeated x times of string', function () {
       assert.equal('*****', '*'.repeat(5))
+      assert.equal('', '*'.repeat(0))
+      assert.equal('*', '*'.repeat(1.8))
+      assert.equal('*', '*'.repeat(1.4))
+      assert.equal('*', '*'.repeat(true))
+      assert.equal('', '*'.repeat(false))
+    })
+
+    it('should throw exception for invalid count value', function () {
+      try {
+        '*'.repeat(-1)
+      } catch (e) {
+        assert.equal(e instanceof Error, true)
+      }
     })
   })
 

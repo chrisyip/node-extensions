@@ -12,7 +12,6 @@
     "quotes": 0,
     "no-else-return": 1,
     "block-scoped-var": 2,
-    "no-lonely-if": 1,
     "comma-style": [
       2,
       "last"
