@@ -128,8 +128,12 @@ describe('Object', function () {
         foo: {
           bar: {
             baz: 'baz'
-          }
-        }
+          },
+
+          baz: ['baz']
+        },
+
+        fooo: null
       }
       var bar = {
         foobar: 'foobar'
@@ -143,7 +147,7 @@ describe('Object', function () {
 
       assert.equal('baz', Object.props(foo, 'foo.bar.baz'))
       assert.equal('bar', Object.props(foo, bar))
-      assert.equal(undefined, Object.props(foo, 'foo.baz'))
+      assert.equal(undefined, Object.props(foo, 'foo.bazz'))
       assert.equal('bar', Object.props(foo, {}))
       assert.equal(undefined, Object.props(undefined, 'foo.bar'))
       assert.equal(undefined, Object.props(null, 'foo.bar'))
@@ -151,6 +155,15 @@ describe('Object', function () {
 
       assert.equal(undefined, Object.props(foobar, 'baz'))
       assert.equal(undefined, Object.props(baz, 'foo'))
+
+      assert.equal(1, Object.props(foo, 'foo.baz.length'))
+      assert.equal(null, Object.props(foo, 'fooo'))
+
+      assert.equal(3, Object.props(baz, 'length'))
+      baz.foo = 'foo'
+      assert.equal(undefined, Object.props(baz, 'foo'))
+
+      assert.equal('function', typeof Object.props(1, 'toString'))
     })
   })
 
@@ -160,8 +173,12 @@ describe('Object', function () {
         foo: {
           bar: {
             baz: 'baz'
-          }
-        }
+          },
+
+          bazz: ['bazz']
+        },
+
+        baz: null
       }
       var bar = {
         foobar: 'foobar'
@@ -180,6 +197,16 @@ describe('Object', function () {
 
       assert.equal(false, Object.hasProps(foobar, 'baz'))
       assert.equal(false, Object.hasProps(baz, 'foo'))
+
+      assert.equal(true, Object.hasProps(foo, 'foo.bazz.length'))
+
+      assert.equal(true, Object.hasProps(foo, 'baz'))
+
+      assert.equal(true, Object.hasProps(baz, 'length'))
+      baz.foo = 'foo'
+      assert.equal(false, Object.hasProps(baz, 'foo'))
+
+      assert.equal(true, Object.hasProps(1, 'toString'))
     })
   })
 })
